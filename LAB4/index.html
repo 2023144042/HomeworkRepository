@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>내가 좋아하는 영화</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+
+    
+    <div class="index-container">
+        <p>
+            <div class="container2">
+                <h1>
+                인프밍 영화정보 사이트 입니다.
+                </h1>
+            </div>
+        </p>
+
+        
+        <p>
+            <nav class="nav-container">
+                <a href="index.html">메인페이지</a>
+                <a href="login.html">로그인</a>
+                <a href="signup.html">회원가입</a>
+
+            </nav>
+        </p>
+
+        <div class="controls">
+            <input type="text" id="search-input" placeholder="제목 또는 줄거리 검색..." />
+            <select id="sort-select">
+                <option value="">-- 정렬 선택 --</option>
+                <option value="rating-high">평점 높은 순</option>
+                <option value="rating-low">평점 낮은 순</option>
+                <option value="date-old">개봉 빠른 순</option>
+                <option value="date-new">개봉 느린 순</option>
+            </select>
+        </div>
+
+
+        <div class="movie-list" id="movie-container">
+        
+        </div>
+
+        
+        
+    </div>
+    <script>
+        const container = document.getElementById('movie-container');
+        const searchInput = document.getElementById('search-input');
+        const sortSelect = document.getElementById('sort-select');
+
+        let allMovies = [];
+        let filteredMovies = [];
+        let loadedCount = 0;
+        const BATCH_SIZE = 6;
+
+        function formatDate(dateStr) {
+            if (!dateStr) return "개봉일 미상";
+            const date = new Date(dateStr);
+            if (isNaN(date)) return "개봉일 미상";
+            return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
+            }
+
+
+        function renderMovies(movies, reset = false) {
+            if (reset) container.innerHTML = '';
+            const batch = movies.slice(loadedCount, loadedCount + BATCH_SIZE);
+
+            for (const movie of batch) {
+            const card = document.createElement('div');
+            card.className = 'movie-card';
+
+            const image = document.createElement('img');
+            image.src = movie.poster_path;
+            image.alt = movie.title;
+
+            const title = document.createElement('h3');
+            title.textContent = movie.title;
+
+            const vote = document.createElement('p');
+            vote.innerHTML = `<strong>평점:</strong> ${movie.vote_average}`;
+
+            const date = document.createElement('p');
+                date.innerHTML = `<strong>개봉일:</strong> ${formatDate(movie.release_date)}`;
+
+            const overview = document.createElement('p');
+            overview.className = 'overview';
+            overview.textContent = movie.overview;
+
+            card.appendChild(image);
+            card.appendChild(title);
+            card.appendChild(date);
+            card.appendChild(vote);
+            card.appendChild(overview);
+
+            container.appendChild(card);
+            }
+
+            loadedCount += BATCH_SIZE;
+        }
+
+        function filterAndSort() {
+            const keyword = searchInput.value.toLowerCase();
+            const sortValue = sortSelect.value;
+
+            
+            filteredMovies = allMovies.filter(movie =>
+            movie.title.toLowerCase().includes(keyword) ||
+            movie.overview.toLowerCase().includes(keyword)
+            );
+
+
+            switch (sortValue) {
+            case 'rating-high':
+                filteredMovies.sort((a, b) => b.vote_average - a.vote_average);
+                break;
+            case 'rating-low':
+                filteredMovies.sort((a, b) => a.vote_average - b.vote_average);
+                break;
+            case 'date-old':
+                filteredMovies.sort((a, b) => new Date(a.release_date) - new Date(b.release_date));
+                break;
+            case 'date-new':
+                filteredMovies.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+                break;
+            }
+
+            loadedCount = 0;
+            renderMovies(filteredMovies, true);
+        }
+
+        fetch('product_30.json')
+            .then(res => res.json())
+            .then(data => {
+            allMovies = data.map(m => ({
+                ...m,
+                release_date: m.release_date || '1900-01-01'
+            }));
+            filteredMovies = [...allMovies];
+            renderMovies(filteredMovies);
+            });
+
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+            if (loadedCount < filteredMovies.length) {
+                renderMovies(filteredMovies);
+            }
+            }
+        });
+
+        searchInput.addEventListener('input', filterAndSort);
+        sortSelect.addEventListener('change', filterAndSort);
+        </script>
+
+
+    
+</body>
+</html>

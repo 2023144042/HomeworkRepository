@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <h1 class="signupmain">Welcome to INTERNET-PROGRAMMING MOVIE SITE</h1>
+    <p>
+        <div class="loginorsignup">
+            <a href="login.html">로그인</a>
+            <a>|</a>
+            <a href="signup.html">회원가입</a>
+            <a>|</a>
+            <a href="index.html">메인페이지</a>
+        </div>
+    </p>
+    <div class="container">
+        <p>
+            <label>이름: <input name="name" type="name" autocomplete="off"></label>
+        </p>
+
+        <p>
+            <label>생일: <input name="date" type="date" required></label>
+        </p>
+
+        <p>
+            <label>성별: <input name="gender" type="radio" required> 남자 </label>
+            <label><input name="gender" type="radio" required> 여자 </label>
+        </p>
+
+        <p>
+            <label>
+                학년: <input type="number" name="grade" min="1" max="4" step="1" value="1">
+            </label>
+        </p>
+
+        <p>
+            <label>아이디: <input name="id" type="id" autofocus></label>
+        </p>
+
+        <p>
+            <label>비밀번호: <input name="password" type="password" placeholder="ex:4411"></label>
+        </p>
+
+        <p>
+            <label for="question">보안질문:</label>
+            <select id="question" name="question" required>
+            <option value="">-- 선택--</option>
+            <option value="1">1234</option>
+            <option value="2">5678</option>
+            <option value="3">910111</option>
+            <option value="4">121212</option>
+            </select>
+
+        </p>
+
+        <button class="btn signup-btn">Sign Up</button>
+        <button class="btn cancel-btn">Cancel</button>
+
+    </div>
+</body>
+</html>

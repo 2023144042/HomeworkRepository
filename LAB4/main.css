@@ -1,0 +1,223 @@
+.signupmain { text-align: center
+}
+.loginorsignup{
+    font-size: 10pt;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    margin: 5px;
+}
+
+.signup-btn {
+    background-color: #4CAF50;
+}
+
+.cancel-btn {
+    background-color: #f44336;
+}
+
+.container {
+    width: 900px;               
+    margin: 50px auto;          
+    padding: 20px;              
+    border: 2px solid black;    
+    border-radius: 10px;        
+    background-color: #f9f9f9;  
+    }
+
+    .container2 {
+        width: 450px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .container2 h1{
+        display: inline-block;
+        animation-name: a;
+        animation-duration: 3s;
+        animation-timing-function: linear;
+    }
+
+    @keyframes a {
+        from {
+        transform: translateX(1020px);
+        }
+        to {
+        transform: translateX(0);
+        }
+    }
+
+    .index-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 1020px;
+        margin: 0 auto;
+    }
+
+    .img-container{
+        position: relative;
+        display: inline-block;
+        z-index: 0;
+    }
+
+    .img-container:hover img {
+        transition: transform 2s;
+        transform: scale(1.2);
+    }
+
+    .img-title{
+        position: absolute;
+        background-color: white;
+        bottom: 40px;
+        z-index: 1;
+        opacity: 0;
+    }
+
+    .img-container:hover .img-title {
+        transition: opacity 0.5s;
+        opacity: 1;
+
+    }
+    .maincontent-container{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: left;
+    }
+
+    .nav-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .text-container{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .link-container{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .table-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .movie-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        }
+
+        
+        .movie-card {
+        width: 300px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 16px;
+        box-sizing: border-box;
+        }
+
+        .movie-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+        }
+
+        .movie-card h3 {
+        margin: 12px 0 6px;
+        }
+
+        .movie-card p {
+        font-size: 14px;
+        color: #333;
+        }
+
+        .movie-card p.overview {
+            display: none; 
+            margin-top: 10px;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        .movie-card:hover p.overview {
+            display: block;
+        }
+
+
+    @media (max-width: 480px) {
+        .nav-container {
+            flex-direction: column;
+            align-items: center;
+            width: 350px;
+        }
+
+        .maincontent-container{
+            width: 480px;
+        }
+
+        .table-container{
+            width: 350px;
+        }
+    }
+    
+    @media (min-width: 481px) and (max-width: 800px) {
+        .nav-container {
+            flex-direction: row;
+            justify-content: space-around;
+            width: 681px;
+        }
+
+        .maincontent-container{
+            width: 480px;
+        }
+
+        .table-container{
+            width: 681px;
+        }
+    }
+    
+    @media (min-width: 801px) {
+        .nav-container {
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+        .maincontent-container{
+            width: 480px;
+        }
+        
+        .index-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 1020px;
+        }
+
+        .table-container{
+            width: 801px;
+        }
+    }
